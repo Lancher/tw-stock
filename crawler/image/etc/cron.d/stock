@@ -1,0 +1,3 @@
+30 16 * * * root /testing_scripts/stock.sh > /testing_scripts/stock.txt 2>&1
+
+

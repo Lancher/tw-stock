@@ -1,0 +1,23 @@
+version: '2'
+services:
+  web:
+    build: ./web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./web/app:/app
+      - ~/stock-data:/stock-data
+  db:
+    image: "mysql:5"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+  crawler:
+    build: ./crawler
+    ports:
+      - "6080:80"
+    environment:
+      - TZ=Asia/Taipei
+      - VNC_PASSWORD=444555666d
+    volumes:
+      - ./crawler/image/testing_scripts:/testing_scripts
+      - ~/stock-data:/data
