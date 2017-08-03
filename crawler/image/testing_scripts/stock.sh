@@ -10,6 +10,7 @@ BROKERS_SCRIPT_DIR=${SCRIPTS_DIR}/selenium-grep-brokers
 TSE_SCRIPT_DIR=${SCRIPTS_DIR}/selenium-grep-tse-reports
 OTC_SCRIPT_DIR=${SCRIPTS_DIR}/selenium-grep-otc-reports
 CMONEY_SCRIPT_DIR=${SCRIPTS_DIR}/selenium-grep-cmoney
+MYSQL_SCRIPT_DIR=/app
 LOG=${SCRIPTS_DIR}/stock.txt
 
 EMAIL_SENDER=stock@stock.c.cobalt-cider-169103.internal
@@ -60,9 +61,14 @@ TZ='Asia/Taipei' DISPLAY=:1 ./run.py
 rc=$?; if [[ $rc != 0 ]]; then email_error "greping otc companies"; exit $rc; fi
 
 # grep cmoney
-cd ${CMONEY_SCRIPT_DIR}
-TZ='Asia/Taipei' DISPLAY=:1 ./run.py
-rc=$?; if [[ $rc != 0 ]]; then  email_error "greping cmoney"; exit $rc; fi
+# cd ${CMONEY_SCRIPT_DIR}
+# TZ='Asia/Taipei' DISPLAY=:1 ./run.py
+# rc=$?; if [[ $rc != 0 ]]; then  email_error "greping cmoney"; exit $rc; fi
+
+# insert into mysql
+cd ${MYSQL_SCRIPT_DIR}
+TZ='Asia/Taipei' DISPLAY=:1 ./parse_stock_data_to_mysql.py -d /data/
+rc=$?; if [[ $rc != 0 ]]; then  email_error "inserting mysql"; exit $rc; fi
 
 email_success
 

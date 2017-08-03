@@ -27,7 +27,7 @@ data = {}
 def parse(args):
     s = datetime.strptime(args.s, '%Y_%m_%d')
     e = datetime.strptime(args.e, '%Y_%m_%d')
-    delta = e - s
+    delta = e - s + timedelta(days=1)
 
     con = MySQLdb.connect(host='db', user='root', passwd='1234', db='stock')
     with con:
@@ -99,6 +99,8 @@ def parse(args):
                 if int(amount) == 0:
                     continue
                 company_csv = os.path.join(args.d, d, '{}_{}.csv'.format(code, d))
+                if not os.path.exists(company_csv ):
+                    continue
                 logging.info(company_csv)
                 table[code] = {}
                 with open(company_csv, 'r') as f:
@@ -178,6 +180,8 @@ def parse(args):
                 if int(amount) == 0:
                     continue
                 company_csv = os.path.join(args.d, d, '{}_{}.csv'.format(code, d))
+                if not os.path.exists(company_csv):
+                    continue
                 logging.info(company_csv)
                 table[code] = {}
                 with open(company_csv, 'r') as f:
@@ -222,7 +226,7 @@ def parse(args):
                         total_buy_amount += table[code][broker][price][0]
                         sell_value += price * table[code][broker][price][1]
                         total_sell_amount += table[code][broker][price][1]
-                    cur.execute("INSERT INTO tran (date, company_code1, broker_code, buy_price, buy_amount, sell_price, sell_amount) "
+                    cur.execute("INSERT INTO tran (date, company_code, broker_code, buy_price, buy_amount, sell_price, sell_amount) "
                                 "VALUES ('{}', '{}', '{}', {}, {}, {}, {}) "
                                 .format((s + timedelta(days=i)).strftime('%Y-%m-%d %H:%M:%S'), code, broker,
                                         0 if total_buy_amount == 0 else round(buy_value / total_buy_amount, 2), total_buy_amount,
@@ -232,9 +236,10 @@ def parse(args):
 def main():
     # args
     parser = argparse.ArgumentParser()
+    day = datetime.now().strftime('%Y_%m_%d')
     parser.add_argument('-d', action='store', help='stock data directory', type=str)
-    parser.add_argument('-s', action='store', help='Starting date. ex: 2017_03_09', type=str)
-    parser.add_argument('-e', action='store', help='End date(Not Included) ex: 2017_03_12', type=str)
+    parser.add_argument('-s', action='store', help='Starting date, ex: 2017_03_09', type=str, default=day)
+    parser.add_argument('-e', action='store', help='End date, ex: 2017_03_12', type=str, default=day)
     args = parser.parse_args()
 
     # parse
