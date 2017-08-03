@@ -42,7 +42,7 @@ def grep_date():
     :return:
     """
     while True:
-        driver = webdriver.Firefox()
+        driver = get_chrome_driver()
         try:
             driver.get('http://www.twse.com.tw/zh/page/trading/exchange/MI_INDEX.html')
             time.sleep(20)
@@ -64,7 +64,7 @@ def grep_date():
                 driver.quit()
                 logging.info('{} 非交易日'.format(datetime.datetime.now().strftime('%Y_%m_%d')))
                 sys.exit(0)
-            # quit firefox
+            # quit chrome
             driver.quit()
             break
         except WebDriverException:
@@ -97,13 +97,30 @@ def get_firefox_driver():
     return driver
 
 
+def get_chrome_driver():
+    """
+    Create a chrome with downloading settings.
+    :return:
+    """
+    # data dir
+    data_dir = os.path.join('/data', data['date'])
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
+    options = webdriver.ChromeOptions()
+    prefs = {"download.default_directory": data_dir}
+    options.add_experimental_option("prefs", prefs)
+    options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(chrome_options=options)
+    return driver
+
+
 def grep_price():
     """
     Grep today's price report.
     :return:
     """
     while True:
-        driver = get_firefox_driver()
+        driver = get_chrome_driver()
         try:
             driver.get('http://www.twse.com.tw/zh/page/trading/exchange/MI_INDEX.html')
             time.sleep(10)
@@ -168,17 +185,17 @@ def grep_report():
     start_captchar_daemon()
 
     i = 0
-    driver = get_firefox_driver()
+    driver = get_chrome_driver()
     while not q.empty():
         # download reports
         sz = q.qsize()
         for _ in range(sz):
             company = q.get()
-            # restart firefox every 50 times
+            # restart chrome every 50 times
             i += 1
             if i % 50 == 0:
                 driver.quit()
-                driver = get_firefox_driver()
+                driver = get_chrome_driver()
             try:
                 driver.get("http://bsr.twse.com.tw/bshtm/")
 
@@ -213,9 +230,7 @@ def grep_report():
                 # click to download file
                 time.sleep(1)
                 driver.find_element(By.XPATH, '//*[@id="HyperLink_DownloadCSV"]').click()
-                if len(driver.window_handles) > 1:
-                    driver.close()
-                    driver.switch_to.window(driver.window_handles[0])
+                time.sleep(1)
                 logging.info('{} 下載成功'.format(company))
             except NoSuchElementException:
                 try:
@@ -228,9 +243,9 @@ def grep_report():
                     else:
                         pass
                 except WebDriverException:
-                    driver = get_firefox_driver()
+                    driver = get_chrome_driver()
             except WebDriverException:
-                driver = get_firefox_driver()
+                driver = get_chrome_driver()
             except HTTPError:
                 start_captchar_daemon()
 
@@ -257,7 +272,7 @@ def grep_report():
                         logging.warning('{}.csv 無法下載'.format(company[0]))
         logging.warning('{}個csv 遺失'.format(cnt))
 
-    # quit firefox
+    # quit chrome
     driver.quit()
 
 
@@ -288,7 +303,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
 
 

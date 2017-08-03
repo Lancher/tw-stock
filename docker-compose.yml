@@ -22,4 +22,4 @@ services:
       - ./crawler/image/testing_scripts:/testing_scripts
       - ~/stock-data:/data
       - ./web/app:/app
-
+      - /dev/shm:/dev/shm

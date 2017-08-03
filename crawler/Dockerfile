@@ -8,13 +8,11 @@ RUN sed -i 's#http://archive.ubuntu.com/#http://tw.archive.ubuntu.com/#' /etc/ap
 # built-in packages
 RUN apt-get update \
     && apt-get install -y --no-install-recommends software-properties-common curl \
-    && sh -c "echo 'deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/ /' >> /etc/apt/sources.list.d/arc-theme.list" \
-    && curl -SL http://download.opensuse.org/repositories/home:Horst3180/xUbuntu_16.04/Release.key | apt-key add - \
     && add-apt-repository ppa:fcwu-tw/ppa \
     && apt-get update \
     && apt-get install -y --no-install-recommends --allow-unauthenticated \
         supervisor \
-        openssh-server pwgen sudo vim wget cron rsyslog \
+        openssh-server pwgen sudo unzip vim wget cron rsyslog \
         net-tools \
         lxde x11vnc xvfb \
         gtk2-engines-murrine ttf-ubuntu-font-family \
@@ -24,7 +22,7 @@ RUN apt-get update \
         nginx \
         python-pip python-dev build-essential \
         mesa-utils libgl1-mesa-dri \
-        gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine pinta arc-theme \
+        gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine pinta \
         dbus-x11 x11-utils \
         postfix libsasl2-modules mailutils 
 
@@ -60,6 +58,15 @@ RUN apt-get update \
 RUN wget "https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz" \
     && tar -zxvf geckodriver-v0.16.1-linux64.tar.gz -C /usr/local/bin \
     && rm geckodriver-v0.16.1-linux64.tar.gz
+
+# selenium chrome/driver
+RUN wget "https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip" \
+    && unzip chromedriver_linux64.zip -d /usr/local/bin \
+    && rm chromedriver_linux64.zip \
+    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - \
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update \
+    && apt-get install -y google-chrome-stable
 
 EXPOSE 80
 WORKDIR /root

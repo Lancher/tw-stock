@@ -33,13 +33,30 @@ logging.basicConfig(level=logging.INFO, format='[BRO %(levelname).1s %(asctime)s
 data = {'brokers': [], 'date': '', 'date_tw': ''}
 
 
+def get_chrome_driver():
+    """
+    Create a chrome with downloading settings.
+    :return:
+    """
+    # data dir
+    data_dir = os.path.join('/data', data['date'])
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
+    options = webdriver.ChromeOptions()
+    prefs = {"download.default_directory": data_dir}
+    options.add_experimental_option("prefs", prefs)
+    options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(chrome_options=options)
+    return driver
+
+
 def grep_date():
     """
     Grep latest transaction date.
     :return:
     """
     while True:
-        driver = webdriver.Firefox()
+        driver = get_chrome_driver()
         try:
             driver.get('http://www.twse.com.tw/zh/page/trading/exchange/MI_INDEX.html')
             time.sleep(20)
@@ -62,7 +79,7 @@ def grep_date():
                 driver.quit()
                 logging.info('{} 非交易日'.format(datetime.datetime.now().strftime('%Y_%m_%d')))
                 sys.exit(0)
-            # quit firefox
+            # quit chrome
             driver.quit()
             break
         except WebDriverException:
@@ -72,8 +89,8 @@ def grep_date():
 def grep_brokers():
 
     while True:
-        # Use firefox
-        driver = webdriver.Firefox()
+        # Use chrome
+        driver = get_chrome_driver()
         try:
             driver.get('http://www.twse.com.tw/zh/brokerService/brokerList')
 
@@ -155,4 +172,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
