@@ -1,0 +1,129 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(242, 242, 242);
+}
+
+.clear {
+  clear: both;
+}
+
+.menu {
+    width: 150px;
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    font-size: 14px;
+    color: #454545;
+    position: fixed;
+    z-index: 100;
+}
+
+.menu-item {
+    margin: 1px 0 0 -3px;
+    width: 140px;
+    padding: 4px 0 4px 6px;
+    border: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: #aaaaaa;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background-color: #f2f2f2;
+}
+
+.content {
+    width: 80%;
+    margin: 0 0 0 160px;
+    background-color: rgb(242, 242, 242);
+}
+
+.content-home-area {
+    margin: 30px 10px 20px 10px;
+    width: 40%;
+    float: left;
+}
+
+.company-button {
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    font-size: 14px;
+    padding: 3px 3px 4px 3px;
+    display: inline-block;
+    margin: 1px 1px 1px 1px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.broker-button {
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    font-size: 14px;
+    padding: 3px 3px 4px 3px;
+    display: inline-block;
+    margin: 1px 1px 1px 1px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.red-button {
+    border-color: rgba(222, 47, 47, 0.8);
+    color: rgba(222, 47, 47, 0.8);
+}
+
+.green-button {
+    border-color: rgba(15, 101, 15, 0.8);
+    color: rgba(15, 101, 15, 0.8);
+}
+
+.toolbar {
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    font-size: 14px;
+    color: #454545;
+}
+
+.date-toolbar {
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    font-size: 14px;
+    color: #454545;
+}
+
+.date-picker {
+    width: 100px;
+    padding: 5px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 1px 0 0 1px;
+}
+
+.company-title {
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #2c2b2f;
+}
+
+.broker-title {
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #2c2b2f;
+}
+
+.sort-toolbar {
+    float: right;
+}
+
+.toolbar-btn {
+    padding: 3px 3px 4px 3px;
+    display: inline-block;
+    margin: 1px 1px 1px 1px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
