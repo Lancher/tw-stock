@@ -9,4 +9,4 @@ RUN pip install -r /tmp/requirements.txt
 ADD image /
 
 WORKDIR /
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/local/bin/supervisord"]
