@@ -20,7 +20,8 @@ def main():
 
     # web
     app = tornado.web.Application([
-        (r"/", MainHandler),
+        (r"/api", MainHandler),
+        (r'/(.*)', tornado.web.StaticFileHandler, {'path': './frontend', "default_filename": "index.html"})
     ])
     app.listen(80)
 

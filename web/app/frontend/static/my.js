@@ -18,6 +18,7 @@ var test_companies = [
     {code: "5665", name: "富華", open_price: 25.6, close_price: 26.7, focus: 0},
     {code: "1802", name: "檯玻", open_price: 28, close_price: 26.7, focus: 1}
 ];
+
 var test_brokers = [
     {code: "1A6f", name: "新光台中", focus: 1},
     {code: "1A62", name: "新光雞籠", focus: 0},

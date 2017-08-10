@@ -3,6 +3,12 @@ CREATE DATABASE stock;
 USE stock;
 
 
+CREATE TABLE info (
+    id int NOT NULL primary key AUTO_INCREMENT,
+    latest_date DATETIME
+)
+
+
 CREATE TABLE broker (
     id int NOT NULL primary key AUTO_INCREMENT,
     code VARCHAR(10),

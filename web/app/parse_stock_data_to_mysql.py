@@ -232,6 +232,10 @@ def parse(args):
                                         0 if total_buy_amount == 0 else round(buy_value / total_buy_amount, 2), total_buy_amount,
                                         0 if total_sell_amount == 0 else round(sell_value / total_sell_amount, 2), total_sell_amount,))
 
+            # insert to table `info` (latest_date)
+            cur.execute("INSERT INTO info (latest_date) VALUES ('{}')"
+                        .format((s + timedelta(days=i)).strftime('%Y-%m-%d %H:%M:%S')))
+
 
 def main():
     # args
