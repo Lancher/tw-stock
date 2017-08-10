@@ -6,7 +6,7 @@ USE stock;
 CREATE TABLE info (
     id int NOT NULL primary key AUTO_INCREMENT,
     latest_date DATETIME
-)
+);
 
 
 CREATE TABLE broker (
