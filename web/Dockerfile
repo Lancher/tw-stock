@@ -6,6 +6,7 @@ RUN apt-get update \
 ADD ./app/requirements.txt /tmp
 RUN pip install -r /tmp/requirements.txt
 
-WORKDIR /app
-CMD ["python", "app.py"]
+ADD image /
 
+WORKDIR /
+CMD ["/usr/bin/supervisord"]
