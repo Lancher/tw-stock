@@ -17,6 +17,8 @@ body {
     color: #454545;
     position: fixed;
     z-index: 100;
+    height: 100%;
+    overflow: auto;
 }
 
 .menu-item {
@@ -100,7 +102,7 @@ body {
 }
 
 .company-title {
-    margin: 30px 0 10px 5px;
+    margin: 10px 0 5px 0px;
     font-family: "Helvetica Neue",Arial,sans-serif;
     font-size: 16px;
     font-weight: 500;
@@ -126,6 +128,52 @@ body {
     border: 1px solid #ccc;
     border-radius: 3px;
     cursor: pointer;
+}
+
+.info-bar {
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    font-size: 14px;
+    color: #454545;
+    padding: 5px 10px;
+    display: inline-block;
+    border: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: #aaaaaa;
+    margin: 1px 0 0 1px;
+}
+
+.waiting {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    font-size: 30px;
+    margin: auto;
+}
+
+.summaries {
+    float: right;
+}
+
+.summary {
+    display: block;
+    border: solid;
+    border-width: 1px;
+    border-color: #454545;
+    width: 100px;
+    float: left;
+    text-align: right;
+    font-size: 14px;
+    padding: 3px;
+}
+
+.red-font {
+    color: rgba(222, 47, 47, 0.8);
+}
+
+.green-font {
+    color: rgba(15, 101, 15, 0.8);
 }
 
 

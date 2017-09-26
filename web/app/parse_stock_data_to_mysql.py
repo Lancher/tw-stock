@@ -71,8 +71,8 @@ def parse(args):
                         items[0],
                         0 if items[5] == '--' else items[5],
                         0 if items[8] == '--' else items[8],
-                        0 if items[6] == '--' else items[6],
                         0 if items[7] == '--' else items[7],
+                        0 if items[6] == '--' else items[6],
                         int(int(items[2]) / 1000)
                     ])
                     companies.append([items[0], items[1]])
