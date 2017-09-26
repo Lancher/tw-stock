@@ -75,7 +75,7 @@ def grep_date():
             logging.info(data['date'])
 
             # check if today a transaction date
-            if '-skip-date' not in sys.argv:
+            if '--skip-date' not in sys.argv:
                 if datetime.datetime.now().strftime('%Y_%m_%d') != data['date']:
                     driver.quit()
                     logging.info('{} 非交易日'.format(datetime.datetime.now().strftime('%Y_%m_%d')))
