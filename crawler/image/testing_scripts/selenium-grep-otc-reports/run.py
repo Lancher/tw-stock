@@ -201,7 +201,7 @@ def grep_report():
                 driver.get("http://www.tpex.org.tw/web/stock/aftertrading/broker_trading/brokerBS.php")
 
                 # scroll 100px
-                driver.execute_script("window.scrollTo(0, 50)")
+                driver.execute_script("window.scrollTo(0, 100)")
 
                 # Find captchar
                 ele = driver.find_element(By.XPATH, '/html/body/center/div[3]/div[2]/div[4]/form/div[3]/div/img')
@@ -213,7 +213,7 @@ def grep_report():
 
                 # Crop the snapshot
                 img = Image.open('snapshot.png')
-                img = img.crop((points['x'], points['y'] - 50, points['x'] + sz['width'], points['y'] - 50 + sz['height']))
+                img = img.crop((points['x'], points['y'] - 100, points['x'] + sz['width'], points['y'] - 100 + sz['height']))
                 img.save('snapshot.png')
                 img_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'snapshot.png')
 
