@@ -51,14 +51,14 @@ TZ='Asia/Taipei' DISPLAY=:1 ./run.py
 rc=$?; if [[ $rc != 0 ]]; then email_error "greping brokers"; exit $rc; fi
 
 # grep tse companies
-cd ${TSE_SCRIPT_DIR}
-TZ='Asia/Taipei' DISPLAY=:1 ./run.py
-rc=$?; if [[ $rc != 0 ]]; then email_error "greping tse companies"; exit $rc; fi
+#cd ${TSE_SCRIPT_DIR}
+#TZ='Asia/Taipei' DISPLAY=:1 ./run.py
+#rc=$?; if [[ $rc != 0 ]]; then email_error "greping tse companies"; exit $rc; fi
 
 # grep otc companies
-cd ${OTC_SCRIPT_DIR}
-TZ='Asia/Taipei' DISPLAY=:1 ./run.py
-rc=$?; if [[ $rc != 0 ]]; then email_error "greping otc companies"; exit $rc; fi
+#cd ${OTC_SCRIPT_DIR}
+#TZ='Asia/Taipei' DISPLAY=:1 ./run.py
+#rc=$?; if [[ $rc != 0 ]]; then email_error "greping otc companies"; exit $rc; fi
 
 # grep cmoney
 # cd ${CMONEY_SCRIPT_DIR}
@@ -66,9 +66,9 @@ rc=$?; if [[ $rc != 0 ]]; then email_error "greping otc companies"; exit $rc; fi
 # rc=$?; if [[ $rc != 0 ]]; then  email_error "greping cmoney"; exit $rc; fi
 
 # insert into mysql
-cd ${MYSQL_SCRIPT_DIR}
-TZ='Asia/Taipei' DISPLAY=:1 ./parse_stock_data_to_mysql.py -d /data/
-rc=$?; if [[ $rc != 0 ]]; then  email_error "inserting mysql"; exit $rc; fi
+#cd ${MYSQL_SCRIPT_DIR}
+#TZ='Asia/Taipei' DISPLAY=:1 ./parse_stock_data_to_mysql.py -d /data/
+#rc=$?; if [[ $rc != 0 ]]; then  email_error "inserting mysql"; exit $rc; fi
 
 email_success
 
