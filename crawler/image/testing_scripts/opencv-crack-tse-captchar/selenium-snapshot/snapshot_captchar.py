@@ -13,8 +13,19 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 from PIL import Image
 
+def get_chrome_driver():
+    """
+    Create a chrome with downloading settings.
+    :return:
+    """
+    options = webdriver.ChromeOptions()
+    options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(chrome_options=options)
+    return driver
+
+
 # Use firefox
-driver = webdriver.Firefox()
+driver = get_chrome_driver()
 
 for _ in range(200):
 

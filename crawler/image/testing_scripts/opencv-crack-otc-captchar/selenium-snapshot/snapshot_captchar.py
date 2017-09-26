@@ -3,8 +3,20 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from PIL import Image
 
+
+def get_chrome_driver():
+    """
+    Create a chrome with downloading settings.
+    :return:
+    """
+    options = webdriver.ChromeOptions()
+    options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(chrome_options=options)
+    return driver
+
+
 # Use firefox
-driver = webdriver.Firefox()
+driver = get_chrome_driver()
 
 for _ in range(200):
     driver.get("http://www.tpex.org.tw/web/stock/aftertrading/broker_trading/brokerBS.php")
