@@ -1,3 +1,8 @@
+## tw-stock
+
+![image](./snapshot/snapshot-1.png)
+![image](./snapshot/snapshot-2.png)
+
 ## Usage
 
 Parse the stock reports to mysql:
